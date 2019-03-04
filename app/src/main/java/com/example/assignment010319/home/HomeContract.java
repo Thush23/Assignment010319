@@ -1,19 +1,21 @@
 package com.example.assignment010319.home;
 
 
-import com.example.assignment010319.model.SpaceShuttleRepos;
+import com.example.assignment010319.model.Repos.Launch;
 
 import java.util.List;
 
-    public interface HomeContract {
+public interface HomeContract {
 
         interface Presenter {
-            void getDataForSpaceShuttle(String name);
+            void getLaunchDate(String date);
         }
 
         interface View {
-            void showResults(List<SpaceShuttleRepos> results);
+            void showLaunches(List<Launch> result);
             void showError(String errorMessage);
         }
     }
+
+
 

@@ -6,37 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="723dp"
+        android:text="Please Fill in the Following and Click Get Data"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="6dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/etlaunchdate"
-        android:layout_width="260dp"
+        android:id="@+id/etYear"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="Please Enter a Launch date"
-        android:textSize="20dp"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Enter a year"
+        android:inputType="number"
+        android:maxLength="4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnstation"
+        android:id="@+id/btngetdata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Get Station Name"
+        android:text="Get Data"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etlaunchdate" />
+        app:layout_constraintTop_toBottomOf="@+id/etMonth" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvResults"
-        android:layout_width="395dp"
+        android:id="@+id/rvData"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -45,5 +52,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnstation" />
+        app:layout_constraintTop_toBottomOf="@+id/btngetdata"
+        tools:listitem="@layout/item_result" />
+
+    <EditText
+        android:id="@+id/etMonth"
+        android:layout_width="124dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Enter a Month"
+        android:inputType="number"
+        android:maxLength="2"
+        app:layout_constraintEnd_toStartOf="@+id/etDay"
+        app:layout_constraintStart_toEndOf="@+id/etYear"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etDay"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Enter a Day"
+        android:inputType="number"
+        android:maxLength="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class SpaceShuttleRepos {
+public class LaunchRepos {
 
     @SerializedName("launches")
     @Expose

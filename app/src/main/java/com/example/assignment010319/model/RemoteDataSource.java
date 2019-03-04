@@ -2,8 +2,6 @@ package com.example.assignment010319.model;
 
 import com.example.assignment010319.Constants;
 
-import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -14,15 +12,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RemoteDataSource implements DataSource {
 
-    private DataSource.DataListener listener = null;
+    private final DataSource.DataListener listener;
+    private final SpaceShuttleService spaceShuttleService;
 
-    @Override
-    public void setListener(DataListener listener) {
+    public  RemoteDataSource(DataListener listener) {
         this.listener = listener;
-    }
 
-    @Override
-    public void getDataForSpaceShuttle(String name) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor()
                         .setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -34,23 +29,21 @@ public class RemoteDataSource implements DataSource {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        SpaceShuttleService service = retrofit.create(SpaceShuttleService.class);
-
-        service.getDataForSpaceShuttle(name)
-                .enqueue(new Callback<List<SpaceShuttleRepos>>() {
-                    @Override
-                    public void onResponse(Call<List<SpaceShuttleRepos>> call, Response<List<SpaceShuttleRepos>> response) {
-                        if (listener != null) {
-                            listener.onDataRetrieved(response.body());
-                        }
+        spaceShuttleService = retrofit.create(SpaceShuttleService.class);
+        }
+        @Override
+                public void getLaunchData(String date){
+            spaceShuttleService.getLaunchDetail(date).enqueue(new Callback<LaunchRepos>() {
+                @Override
+                public void onResponse(Call<LaunchRepos> call, Response<LaunchRepos> response) {
+                    if (response.isSuccessful()) {
+                        listener.onLaunchRetrieval(response.body());
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<List<SpaceShuttleRepos>> call, Throwable throwable) {
-                        if (listener != null) {
-                            listener.onFailure(throwable);
-                        }
-                    }
+                @Override
+                public void onFailure(Call<LaunchRepos> call, Throwable t) { listener.onError(t);}
                 });
-    }
+
+        }
 }
